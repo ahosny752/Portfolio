@@ -1,11 +1,5 @@
 import React from 'react';
 
-interface Props {
-    name: string;
-}
-
-const Admin: React.FC<Props> = ({ name }) => {
+export default function Admin({ name }: { name: string }) {
     return <div>Hello, {name}!</div>;
-};
-
-export default Admin;
+}
