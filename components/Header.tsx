@@ -10,7 +10,6 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import ArticleIcon from '@mui/icons-material/Article';
-import { Avatar } from '@mui/material';
 
 const HeaderContainer = styled.div<ThemeProps>`
     display: flex;
@@ -42,7 +41,7 @@ const Name = styled.div`
     margin-right: 10px;
 
     @media only screen and (max-width: 767px) {
-        font-size: 25px;
+        font-size: 30px;
     }
 `;
 
@@ -79,7 +78,6 @@ const IconContainer = styled.div<ThemeProps>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* width: 100%; */
     padding: 8px;
     height: 32px;
     border-radius: 32px;
@@ -96,6 +94,10 @@ const IconContainer = styled.div<ThemeProps>`
                 ? ' rgba(255, 255, 255, 0.336)'
                 : 'rgba(0, 0, 0, 0.227)'};
     }
+
+    @media only screen and (max-width: 767px) {
+        display: none;
+    }
 `;
 
 const Neon = styled.div`
@@ -109,8 +111,8 @@ const Neon = styled.div`
         left: 180px;
 
         @media only screen and (max-width: 767px) {
-            left: 110px;
-            top: 45px;
+            left: 130px;
+            top: 40px;
         }
     }
 
@@ -127,7 +129,7 @@ const Neon = styled.div`
             0 10px 3px #000;
 
         @media only screen and (max-width: 767px) {
-            font-size: 20px;
+            font-size: 26px;
         }
     }
     &.logo b span {

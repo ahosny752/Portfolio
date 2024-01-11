@@ -9,6 +9,10 @@ import { Inter, REM, Fredoka, Vibur } from 'next/font/google';
 import Avatar from '@mui/material/Avatar';
 import profilePic from '@/assets/profilepic.jpg';
 import Chatbot from '../Chatbot';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
+import ArticleIcon from '@mui/icons-material/Article';
 
 const HomeContainer = styled.div<ThemeProps>`
     display: flex;
@@ -49,6 +53,7 @@ const ContentRight = styled.div`
     height: 600px;
 
     @media only screen and (max-width: 767px) {
+        margin-bottom: 30px;
         width: 100%;
         order: -1; /* This moves the #right element to the beginning */
     }
@@ -163,7 +168,6 @@ const ToolContainer = styled.div`
     display: inline-flex;
     margin-right: 10px;
     margin-bottom: 10px;
-
     justify-content: center;
     align-items: center;
     border-radius: 4px;
@@ -185,9 +189,51 @@ const StyledAvatar = styled(Avatar)<ThemeProps>`
 const Title = styled.div`
     font-size: 60px;
     font-weight: bold;
-    margin-top: -10px;
+    margin-top: -50px;
     @media only screen and (max-width: 767px) {
         font-size: 50px;
+    }
+`;
+
+const SocialsContainer = styled.div`
+    display: none;
+
+    @media only screen and (max-width: 767px) {
+        display: unset;
+        font-size: 30px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+`;
+
+const SocialsContent = styled.div`
+    height: 50px;
+    width: 400px;
+`;
+
+const SocialsLabel = styled.span`
+    font-size: 20px;
+`;
+
+const IconContainer = styled.div<ThemeProps>`
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    height: 32px;
+    border-radius: 32px;
+    background-color: ${props =>
+        props.theme.isDarkMode
+            ? ' rgba(255, 255, 255, 0.254)'
+            : 'rgba(0, 0, 0, 0.08)'};
+
+    cursor: pointer;
+
+    :hover {
+        background-color: ${props =>
+            props.theme.isDarkMode
+                ? ' rgba(255, 255, 255, 0.336)'
+                : 'rgba(0, 0, 0, 0.227)'};
     }
 `;
 
@@ -209,12 +255,7 @@ export default function Home(props: any) {
             <ContentContainer>
                 <ContentLeft>
                     <div style={{ fontSize: '38px' }}>Full Stack</div>
-                    <div
-                        style={{
-                            width: '600px',
-                            height: '20px',
-                        }}
-                    >
+                    <div>
                         <object
                             type="image/svg+xml"
                             data={squiggle.src}
@@ -232,6 +273,29 @@ export default function Home(props: any) {
                     <div style={{ fontSize: '20px' }}>
                         Like what you see? Lets Connect!
                     </div>
+
+                    <SocialsContainer>
+                        Social
+                        <SocialsContent>
+                            <IconContainer theme={theme}>
+                                <GitHubIcon />
+                                <SocialsLabel>GitHub</SocialsLabel>
+                            </IconContainer>
+                            <IconContainer theme={theme}>
+                                <LinkedInIcon />
+                                <SocialsLabel>LinkedIn</SocialsLabel>
+                            </IconContainer>
+                            <IconContainer theme={theme}>
+                                <EmailIcon />
+                                <SocialsLabel>Email</SocialsLabel>
+                            </IconContainer>
+                            <IconContainer theme={theme}>
+                                <ArticleIcon />
+                                <SocialsLabel>Resume</SocialsLabel>
+                            </IconContainer>
+                        </SocialsContent>
+                    </SocialsContainer>
+
                     <div
                         style={{
                             fontSize: '30px',
