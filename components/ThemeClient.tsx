@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayJs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import App from './App';
 import { styled } from '@mui/material/styles';

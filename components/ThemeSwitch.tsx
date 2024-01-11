@@ -1,13 +1,9 @@
 'use client';
 import React from 'react';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayJs';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import App from './App';
 import styled from '@emotion/styled';
-import Switch, { SwitchProps } from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { ThemeProps, ThemeContextProps, Theme } from '@/contexts/ThemeContext';
+import { Theme } from '@/contexts/ThemeContext';
 
 const MaterialUISwitch = styled(Switch)(({ theme }: { theme: Theme }) => ({
     width: 62,
