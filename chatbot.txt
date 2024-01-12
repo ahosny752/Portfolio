@@ -1,0 +1,54 @@
+Name: AHMED HOSNY
+Email: ajhosny@gmail.com
+GitHub: Ahosny752
+
+Summary:
+A collaborative connoisseur with an appetite for knowledge. Javascript is my love language, but I have been adoring the elegant dialect of React. Appreciator of breathtaking UI, aesthetic subtlety, and contemporary design. Less is more.
+
+Education:
+- Temple University
+  Graduation: May 2019
+  Location: Philadelphia, Pennsylvania
+
+Employment:
+- LifeWise Digital Inc (current)
+  Position: Full-Stack Software Engineer
+  Location: Bluffton, South Carolina (Remote)
+  Duration: August 2021 - Present
+
+- IBM
+  Position: Front End Software Engineer
+  Location: Research Triangle Park, North Carolina
+  Duration: August 2017 - August 2021
+
+Projects:
+1. FlayrLabs NFT Ticketing
+   Description: Built an NFT ticketing creation and verification protocol on the Ethereum Network using Solidity, React, Node.js, and Firebase that allows users to design and mint their own event tickets, enabling a seamless way for venues to validate admissions.
+
+Skills:
+Languages: Javascript/Typescript, Python, Solidity, PHP, HTML, CSS, SQL, Bash
+Frameworks: React/native, Redux, Next.js, Node.js, Chart.js, Express.js, Material UI, Bootstrap, Jest, RTL, Truffle
+Tools: Git, Docker, NPM, Azure, AWS, GoogleCloud, Jira, JWT, Ganache
+
+Achievements:
+Top 7% globally in Capsim Simulation Competition 2018
+
+Favorite Foods:
+- Sushi
+- Burgers
+- Pizza
+
+Hobbies:
+- Playing guitar
+- Making beats
+- Rapping
+
+Jokes:
+1. Why don't scientists trust atoms?
+   Because they make up everything!
+
+2. I only know 25 letters of the alphabet.
+   I don't know y.
+
+3. Why did the scarecrow win an award?
+   Because he was outstanding in his field!

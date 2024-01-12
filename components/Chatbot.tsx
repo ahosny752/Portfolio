@@ -82,7 +82,7 @@ const Chatbot = () => {
         themeContext as ThemeContextProps;
 
     const openingMessage =
-        "Hi I'm AJ's AI assistant. Im trained on his entire life!, hehe.  You can ask me anything about AJ. Ask me things like 'What is AJ's favorite color?' or 'What is AJ's favorite food?', You can even ask about my past work experience, projects, hobbies or even fun facts!";
+        "Hi I'm AJ's AI assistant. Im trained on his entire life!, hehe. Well at least some of it. You can ask me anything about AJ. Ask me things like 'What is AJ's favorite color?' or 'What is AJ's favorite food?', You can even ask about my past work experience, projects, hobbies or even fun facts!";
 
     useEffect(() => {
         const aiMessage = {
@@ -97,16 +97,13 @@ const Chatbot = () => {
     }, [messages]);
 
     const chatWithGPT3 = async (userInput: string) => {
-        const apiEndpoint =
-            'https://api.openai.com/v1/engines/davinci-codex/completions';
+        const apiEndpoint = 'https://ajhosny.com/api/chatbot';
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer YOUR_OPENAI_API_KEY`,
         };
 
         const data = {
-            prompt: userInput,
-            max_tokens: 150,
+            question: userInput,
         };
         try {
             const response = await fetch(apiEndpoint, {
@@ -115,7 +112,8 @@ const Chatbot = () => {
                 body: JSON.stringify(data),
             });
             const responseData = await response.json();
-            return responseData.choices[0].text.trim();
+            console.log(responseData, 'response data');
+            return responseData;
         } catch (error) {
             console.error(
                 'Error communicating with the API:',
@@ -141,10 +139,9 @@ const Chatbot = () => {
         setMessages(prevMessages => [...prevMessages, userMessage]);
         const aiMessage = { text: '...', user: false };
         setMessages(prevMessages => [...prevMessages, aiMessage]);
-        // const response = await chatWithGPT3(input);
-        const response = 'hi im the virtual asssitant';
+        const response = await chatWithGPT3(input);
 
-        const newAiMessage = { text: response, user: false };
+        const newAiMessage = { text: response.answer.content, user: false };
         setMessages(prevMessages => [
             ...prevMessages.slice(0, -1),
             newAiMessage,
