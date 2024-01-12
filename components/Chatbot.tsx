@@ -97,7 +97,7 @@ const Chatbot = () => {
     }, [messages]);
 
     const chatWithGPT3 = async (userInput: string) => {
-        const apiEndpoint = 'https://ajhosny.com/api/chatbot';
+        const apiEndpoint = 'http://ajhosny.com/api/chatbot';
         const headers = {
             'Content-Type': 'application/json',
         };
