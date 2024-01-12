@@ -191,7 +191,8 @@ const Title = styled.div`
     font-weight: bold;
     margin-top: -50px;
     @media only screen and (max-width: 767px) {
-        font-size: 50px;
+        font-size: 40px;
+        margin-top: -40px;
     }
 `;
 

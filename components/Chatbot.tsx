@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { ThemeProps, ThemeContextProps } from '@/contexts/ThemeContext';
 import { useTheme } from '@/contexts/ThemeContext';
 
 const ChatbotContainer = styled.div<ThemeProps>`
-    width: 400px;
+    width: 380px;
     margin: 0 auto;
     border: ${props => (props.theme.isDarkMode ? 'unset' : '1px solid #ccc')};
     border-radius: 8px;
@@ -50,14 +50,14 @@ const ChatbotContainer = styled.div<ThemeProps>`
     .chatbot-input-form button {
         padding: 8px 16px;
         border: none;
-        background-color: #007bff;
+        background-color: #bc13fe;
         color: white;
         border-radius: 0 4px 4px 0;
         font-size: 16px;
         cursor: pointer;
     }
     .chatbot-input-form button:hover {
-        background-color: #0056b3;
+        background-color: #bb13fe87;
     }
 `;
 const ChatBotMessages = styled.div`
@@ -74,13 +74,15 @@ const Chatbot = () => {
     const [messages, setMessages] = useState<{ text: string; user: boolean }[]>(
         [],
     );
+    const chatbotRef = useRef<HTMLDivElement | null>(null);
+
     const themeContext = useTheme();
 
     const { theme, isDarkMode, setIsDarkMode } =
         themeContext as ThemeContextProps;
 
     const openingMessage =
-        "Hi I'm Ahmed's AI assistant. Im trained on his entire life!, hehe.  You can ask me anything about Ahmed. Ask me things like 'What is Ahmed's favorite color?' or 'What is Ahmed's favorite food?', You can even ask about my past work experience, projects, hobbies or even fun facts!";
+        "Hi I'm AJ's AI assistant. Im trained on his entire life!, hehe.  You can ask me anything about AJ. Ask me things like 'What is AJ's favorite color?' or 'What is AJ's favorite food?', You can even ask about my past work experience, projects, hobbies or even fun facts!";
 
     useEffect(() => {
         const aiMessage = {
@@ -89,6 +91,10 @@ const Chatbot = () => {
         };
         setMessages([aiMessage]);
     }, []);
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const chatWithGPT3 = async (userInput: string) => {
         const apiEndpoint =
@@ -118,6 +124,16 @@ const Chatbot = () => {
             return '';
         }
     };
+
+    const scrollToBottom = () => {
+        if (chatbotRef.current) {
+            console.log('here');
+            chatbotRef.current.style.scrollBehavior = 'smooth'; // Apply smooth scrolling
+
+            chatbotRef.current.scrollTop = chatbotRef.current.scrollHeight;
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!input.trim()) return;
@@ -137,8 +153,8 @@ const Chatbot = () => {
     };
     return (
         <ChatbotContainer theme={theme}>
-            <ChatbotHeader>Ahmed's AI Assistant</ChatbotHeader>
-            <ChatBotMessages>
+            <ChatbotHeader>AJ's AI Assistant</ChatbotHeader>
+            <ChatBotMessages ref={chatbotRef}>
                 {messages.map((message, index) => (
                     <div
                         key={index}

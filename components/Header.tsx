@@ -108,10 +108,10 @@ const Neon = styled.div`
         user-select: none;
         bottom: 0;
         top: 40px;
-        left: 180px;
+        left: 120px;
 
         @media only screen and (max-width: 767px) {
-            left: 130px;
+            left: 80px;
             top: 40px;
         }
     }
@@ -189,7 +189,7 @@ export default function Header() {
         <HeaderContainer theme={theme}>
             <ContentContainer theme={theme}>
                 <LogoContainer>
-                    <Name>Ahmed Hosny</Name>
+                    <Name>AJ Hosny</Name>
                     {isDarkMode ? (
                         <Neon className="logo">
                             <b className={vibur.className}>

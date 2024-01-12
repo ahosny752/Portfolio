@@ -11,6 +11,7 @@ const AppContainer = styled.div<ThemeProps>`
     height: 100%;
     color: ${props => props.theme.secondaryColor};
     background-color: ${props => props.theme.primaryColor};
+    transition: all 0.5s ease;
 `;
 
 const ParticlesContainer = styled.div`
