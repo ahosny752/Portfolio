@@ -1,12 +1,21 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { SupabaseVectorStore } from '@langchain/community/vectorstores/supabase';
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { createClient } from '@supabase/supabase-js';
-import OpenAI from 'openai';
 import path from 'path';
+
+function calculateDynamicChunkSize(text: any, numberOfChunks: number) {
+    // Split the text into words
+    const words = text.split(/\s+/);
+
+    // Calculate the average number of words per chunk based on your desired granularity
+    const averageWordsPerChunk = Math.ceil(words.length / numberOfChunks); // numberOfChunks is a variable you can define
+
+    // Return the calculated chunk size
+    return averageWordsPerChunk;
+}
 
 export async function POST(req: Request) {
     try {
@@ -33,10 +42,16 @@ export async function POST(req: Request) {
 
         // Split the docs
         let splitDocs;
+        const numberOfChunks = 3; // Adjust based on your preference
+        const dynamicChunkSize = calculateDynamicChunkSize(
+            docs[0].pageContent,
+            numberOfChunks,
+        );
+        console.log(dynamicChunkSize, 'dynamic chunk size');
         try {
             const splitter = new RecursiveCharacterTextSplitter({
-                chunkSize: 30,
-                chunkOverlap: 4,
+                chunkSize: dynamicChunkSize,
+                chunkOverlap: 0, // Adjust as needed
                 separators: ['\n\n', '\n', ' ', ''],
             });
             splitDocs = await splitter.splitDocuments([docs[0]]);
@@ -67,7 +82,7 @@ export async function POST(req: Request) {
             }
 
             // Return success message
-            NextResponse.json({
+            return NextResponse.json({
                 data: 'File successfully uploaded to the vector store',
             });
         } catch (vectorStoreError) {

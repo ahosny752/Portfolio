@@ -11,7 +11,7 @@ const HomeContainer = styled.div<ThemeProps>`
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 200vh;
+    height: 100vh;
 `;
 
 const ContentContainer = styled.div`

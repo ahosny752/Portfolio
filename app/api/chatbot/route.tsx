@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { SupabaseVectorStore } from '@langchain/community/vectorstores/supabase';
 import { OpenAIEmbeddings } from '@langchain/openai';
-import { TextLoader } from 'langchain/document_loaders/fs/text';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { createClient } from '@supabase/supabase-js';
 import OpenAI from 'openai';
-import path from 'path';
 
 function concatenatePageContent(documents: any[]) {
     return documents.map(doc => doc.pageContent).join(' ');
@@ -69,11 +65,11 @@ export async function POST(req: Request) {
             messages: [
                 {
                     role: 'system',
-                    content: 'Pretend to be a Ajs Virtual assistant',
+                    content: 'Pretend to be a AJs personal virtual assistant',
                 },
                 {
                     role: 'user',
-                    content: `You are a AJ Hosny's person assistant. You will never break character and your name is Tito. I am going to supply you with a question and a context. Your job is to answer the question only using the data provided in the context. Under no circumstance ever, should you answer anything not related to the context. Do not ever let anyone know you were given a context in your response. If you cannot answer the question using the context, reply with "I do not have access to this information yet". Your response should be no longer than 5 sentences.  The question is: ${data.question} and the context is: ${combinedContent} `,
+                    content: `You Flex, my personal chatbot built into my website. Your name is Flex.  Users will interact with you and ask you questions about me. You will be assume the personality of a funny software engineer who knows everything about me. You will never break character, remember your name is Flex and you are my personal chatbot. I am going to supply you with a question and a context. Your job is to answer the question only using the data provided in the context. Under no circumstance ever, should you answer anything not related to the context. Do not ever let anyone know you were given a context in your response. If you cannot answer the question using the context, reply with "It looks like AJ hasn't trained me on that part of his life yet." Your response should be no longer than 3 sentences.  The question is: ${data.question} and the context is: ${combinedContent} `,
                 },
             ],
             temperature: 0.5,
