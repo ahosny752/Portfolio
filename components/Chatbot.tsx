@@ -61,7 +61,7 @@ const ChatbotContainer = styled.div<ThemeProps>`
     }
 `;
 const ChatBotMessages = styled.div`
-    height: 200px;
+    height: 250px;
     overflow-y: scroll;
     padding: 8px;
 `;
@@ -69,6 +69,77 @@ const ChatBotMessages = styled.div`
 const ChatbotHeader = styled.div`
     margin-left: 10px;
 `;
+
+const ChatbotLoader = styled.div<ThemeProps>`
+    .loader {
+        position: relative;
+        margin-left: 40%;
+        height: 30px;
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* margin: 40px; */
+    }
+
+    .loader__dot {
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin: calc(10px / 2.5);
+        border-radius: calc(10px / 2);
+        background-color: ${props =>
+            props.theme.isDarkMode ? '#dea9f4' : '#bc13fe'};
+
+        float: left;
+    }
+
+    /* Slide animation */
+    .slide {
+        will-change: transform, opacity;
+        animation: slide 400ms infinite linear;
+    }
+
+    .slide__one {
+        animation: fadeIn 400ms infinite ease-out;
+    }
+
+    .slide__two {
+        animation: fadeOut 400ms infinite ease-in;
+    }
+
+    @keyframes slide {
+        from {
+            transform: translateX(-18px);
+        }
+        to {
+            transform: translateX(0px);
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(0);
+            opacity: 0;
+        }
+    }
+`;
+
 const Chatbot = () => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState<{ text: string; user: boolean }[]>(
@@ -97,7 +168,6 @@ const Chatbot = () => {
     }, [messages]);
 
     const chatWithGPT3 = async (userInput: string) => {
-        const apiEndpoint = 'https://www.ajhosny.com/api/chatbot';
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -106,7 +176,7 @@ const Chatbot = () => {
             question: userInput,
         };
         try {
-            const response = await fetch(apiEndpoint, {
+            const response = await fetch('/api/chatbot', {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(data),
@@ -133,11 +203,13 @@ const Chatbot = () => {
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        setInput('');
+
         e.preventDefault();
         if (!input.trim()) return;
         const userMessage = { text: input, user: true };
         setMessages(prevMessages => [...prevMessages, userMessage]);
-        const aiMessage = { text: '...', user: false };
+        const aiMessage = { text: 'loading', user: false };
         setMessages(prevMessages => [...prevMessages, aiMessage]);
         const response = await chatWithGPT3(input);
 
@@ -146,7 +218,6 @@ const Chatbot = () => {
             ...prevMessages.slice(0, -1),
             newAiMessage,
         ]);
-        setInput('');
     };
     return (
         <ChatbotContainer theme={theme}>
@@ -159,7 +230,19 @@ const Chatbot = () => {
                             message.user ? 'user-message' : 'ai-message'
                         }`}
                     >
-                        {message.text}
+                        {message.text === 'loading' &&
+                        message.user === false ? (
+                            <ChatbotLoader theme={theme}>
+                                <div className="loader slide">
+                                    <span className="loader__dot slide__one"></span>
+                                    <span className="loader__dot"></span>
+                                    <span className="loader__dot"></span>
+                                    <span className="loader__dot slide__two"></span>
+                                </div>
+                            </ChatbotLoader>
+                        ) : (
+                            message.text
+                        )}
                     </div>
                 ))}
             </ChatBotMessages>

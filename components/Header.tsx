@@ -5,7 +5,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { ThemeProps, ThemeContextProps } from '@/contexts/ThemeContext';
 import logo1 from '@/assets/logo1.png';
 import ThemeSwitch from './ThemeSwitch';
-import { Inter, REM, Fredoka, Vibur } from 'next/font/google';
+import { Inter, REM, Fredoka, Vibur, Yellowtail } from 'next/font/google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
@@ -117,7 +117,7 @@ const Neon = styled.div`
     }
 
     &.logo b {
-        font-family: 400 'Vibur';
+        font-family: 400 'Yellowtail';
         color: #fee;
         font-size: 26px;
         text-shadow:
@@ -172,7 +172,7 @@ const Neon = styled.div`
     }
 `;
 
-const vibur = Vibur({
+const yellowtail = Yellowtail({
     weight: ['400'],
     style: ['normal'],
     subsets: ['latin'],
@@ -192,7 +192,7 @@ export default function Header() {
                     <Name>AJ Hosny</Name>
                     {isDarkMode ? (
                         <Neon className="logo">
-                            <b className={vibur.className}>
+                            <b className={yellowtail.className}>
                                 <span>Aft</span>er
                                 <span style={{ marginLeft: '5px' }}>Da</span>
                                 <span>r</span>
