@@ -6,6 +6,7 @@ import { ThemeProps, ThemeContextProps } from '@/contexts/ThemeContext';
 import RocketImg from '../../assets/rocket.png';
 import Bio from './Bio';
 import Profile from './Profile';
+import WorkExperience from './WorkExperience';
 
 const HomeContainer = styled.div<ThemeProps>`
     display: flex;
@@ -14,11 +15,17 @@ const HomeContainer = styled.div<ThemeProps>`
     height: 100vh;
 `;
 
-const ContentContainer = styled.div`
+const MainContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const SectionOne = styled.div`
+    margin-top: 60px;
     display: flex;
     flex-direction: row;
     width: 90%;
-    padding-top: 60px;
 
     @media only screen and (max-width: 767px) {
         flex-direction: column;
@@ -38,6 +45,17 @@ const Image = styled.img`
     object-fit: contain;
     object-position: center;
     height: 100%;
+    filter: brightness(
+        0.7
+    ); /* Adjust the value between 0 and 1 (or higher for brighter) */
+`;
+
+const SectionTwo = styled.div`
+    margin-top: -150px;
+
+    height: 100%;
+    border: 1px solid p;
+    width: 90%;
 `;
 
 export default function Home(props: any) {
@@ -66,16 +84,30 @@ export default function Home(props: any) {
 
     return (
         <HomeContainer theme={theme}>
-            <ContentContainer>
-                <Bio theme={theme} />
-                <Profile theme={theme} />
-
-                {theme.isDarkMode ? (
-                    <ImageContainer style={imageStyle}>
-                        <Image src={RocketImg.src} />
-                    </ImageContainer>
-                ) : null}
-            </ContentContainer>
+            <MainContent>
+                <SectionOne>
+                    <Bio theme={theme} />
+                    <Profile theme={theme} />
+                    {theme.isDarkMode ? (
+                        <ImageContainer style={imageStyle}>
+                            <Image src={RocketImg.src} />
+                        </ImageContainer>
+                    ) : null}
+                </SectionOne>
+                <SectionTwo>
+                    <WorkExperience theme={theme} />
+                </SectionTwo>
+            </MainContent>
+            <div
+                style={{
+                    border: '1px solid red',
+                    height: '100%',
+                    width: '90%',
+                }}
+            >
+                <div style={{ height: '600px' }}></div>
+                Contact me
+            </div>
         </HomeContainer>
     );
 }

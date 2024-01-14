@@ -16,6 +16,7 @@ const ContentLeft = styled.div`
     width: 50%;
     @media only screen and (max-width: 767px) {
         width: 100%;
+        margin-top: 60px;
     }
 `;
 
