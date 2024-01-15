@@ -8,6 +8,8 @@ import Bio from './Bio';
 import Profile from './Profile';
 import WorkExperience from './WorkExperience';
 import ContactMe from './ContactMe';
+import WorkExperienceSmall from './WorkExperienceSmall';
+
 const HomeContainer = styled.div<ThemeProps>`
     display: flex;
     align-items: center;
@@ -58,11 +60,29 @@ const SectionTwo = styled.div`
 
 export default function Home(props: any) {
     const themeContext = useTheme();
-
     const { theme, isDarkMode, setIsDarkMode } =
         themeContext as ThemeContextProps;
 
     const [scrollPosition, setScrollPosition] = useState<number>(0);
+    const [isSmallScreen, setIsSmallScreen] = useState(
+        window.innerWidth < 1268,
+    );
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 1268);
+        };
+
+        // Attach the event listener when the component mounts
+        window.addEventListener('resize', handleResize);
+
+        // Remove the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    console.log(isSmallScreen, 'is small');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -94,7 +114,11 @@ export default function Home(props: any) {
                 </SectionOne>
 
                 <SectionTwo>
-                    <WorkExperience theme={theme} />
+                    {isSmallScreen ? (
+                        <WorkExperienceSmall theme={theme} />
+                    ) : (
+                        <WorkExperience theme={theme} />
+                    )}
                 </SectionTwo>
             </MainContent>
             <ContactMe theme={theme} />

@@ -3,7 +3,7 @@ import { ThemeProps, ThemeContextProps } from '@/contexts/ThemeContext';
 import styled from '@emotion/styled';
 import IbmPortraitPic from '../../assets/ibmPortrait.png';
 import DaviePortraitPic from '../../assets/daviePortrait.png';
-import flayrPortraitPic from '../../assets/flayrportrait.png';
+import flayrPortraitPic from '../../assets/flayrlabsHome.png';
 import davieWhiteLogo from '../../assets/davielogo.png';
 import davieBlackLogo from '../../assets/davieBlack.png';
 import IBMBlackLogo from '../../assets/ibmLogo.png';
@@ -525,7 +525,6 @@ export default function WorkExperience({ theme }: ThemeProps) {
                     <ImgContainer
                         theme={theme}
                         style={{
-                            marginTop: '-860px',
                             opacity: calculateFadeInOpacity(2100, 2600),
                         }}
                     >
