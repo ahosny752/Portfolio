@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
 
-        const apiKey = process.env.REACT_APP_API_KEY;
+        const apiKey = process.env.NEXT_PUBLIC_REACT_APP_API_KEY;
 
         if (!apiKey) throw new Error(`Expected env var SUPABASE_PRIVATE_KEY`);
 
