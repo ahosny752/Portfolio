@@ -19,6 +19,11 @@ function calculateDynamicChunkSize(text: any, numberOfChunks: number) {
 
 export async function POST(req: Request) {
     try {
+        const apiKey = req.headers.get('Authorization');
+        if (apiKey !== '1234') {
+            throw new Error('Unauthorized: Invalid API key');
+        }
+
         const openAIApiKey = process.env.REACT_APP_API_OPEN_AI_SECRET;
         const privateKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
         const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

@@ -6,6 +6,9 @@ import { ThemeProps, ThemeContextProps } from '@/contexts/ThemeContext';
 import RocketImg from '../../assets/rocket.png';
 import Bio from './Bio';
 import Profile from './Profile';
+import WorkExperience from './WorkExperience';
+import ContactMe from './ContactMe';
+import WorkExperienceSmall from './WorkExperienceSmall';
 
 const HomeContainer = styled.div<ThemeProps>`
     display: flex;
@@ -14,11 +17,17 @@ const HomeContainer = styled.div<ThemeProps>`
     height: 100vh;
 `;
 
-const ContentContainer = styled.div`
+const MainContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const SectionOne = styled.div`
+    margin-top: 60px;
     display: flex;
     flex-direction: row;
     width: 90%;
-    padding-top: 60px;
 
     @media only screen and (max-width: 767px) {
         flex-direction: column;
@@ -38,15 +47,38 @@ const Image = styled.img`
     object-fit: contain;
     object-position: center;
     height: 100%;
+    filter: brightness(
+        0.7
+    ); /* Adjust the value between 0 and 1 (or higher for brighter) */
+`;
+
+const SectionTwo = styled.div`
+    margin-top: -150px;
+    height: 100%;
+    width: 100%;
 `;
 
 export default function Home(props: any) {
     const themeContext = useTheme();
-
     const { theme, isDarkMode, setIsDarkMode } =
         themeContext as ThemeContextProps;
 
     const [scrollPosition, setScrollPosition] = useState<number>(0);
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 1268);
+        };
+
+        // Attach the event listener when the component mounts
+        window.addEventListener('resize', handleResize);
+
+        // Remove the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -66,16 +98,26 @@ export default function Home(props: any) {
 
     return (
         <HomeContainer theme={theme}>
-            <ContentContainer>
-                <Bio theme={theme} />
-                <Profile theme={theme} />
+            <MainContent>
+                <SectionOne>
+                    <Bio theme={theme} />
+                    <Profile theme={theme} />
+                    {theme.isDarkMode ? (
+                        <ImageContainer style={imageStyle}>
+                            <Image src={RocketImg.src} />
+                        </ImageContainer>
+                    ) : null}
+                </SectionOne>
 
-                {theme.isDarkMode ? (
-                    <ImageContainer style={imageStyle}>
-                        <Image src={RocketImg.src} />
-                    </ImageContainer>
-                ) : null}
-            </ContentContainer>
+                <SectionTwo>
+                    {isSmallScreen ? (
+                        <WorkExperienceSmall theme={theme} />
+                    ) : (
+                        <WorkExperience theme={theme} />
+                    )}
+                </SectionTwo>
+            </MainContent>
+            <ContactMe theme={theme} />
         </HomeContainer>
     );
 }
