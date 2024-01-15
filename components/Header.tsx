@@ -10,6 +10,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import ArticleIcon from '@mui/icons-material/Article';
+import { useRouter } from 'next/navigation';
 
 const HeaderContainer = styled.div<ThemeProps>`
     display: flex;
@@ -181,6 +182,7 @@ const yellowtail = Yellowtail({
 
 export default function Header() {
     const themeContext = useTheme();
+    const { push } = useRouter();
 
     const { theme, isDarkMode, setIsDarkMode } =
         themeContext as ThemeContextProps;
@@ -202,19 +204,33 @@ export default function Header() {
                     ) : null}
                 </LogoContainer>
                 <SocialsContainer>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() => push('https://github.com/ahosny752')}
+                        theme={theme}
+                    >
                         <GitHubIcon />
                         <SocialsLabel>GitHub</SocialsLabel>
                     </IconContainer>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() =>
+                            push('https://www.linkedin.com/in/ahosny752/')
+                        }
+                        theme={theme}
+                    >
                         <LinkedInIcon />
                         <SocialsLabel>LinkedIn</SocialsLabel>
                     </IconContainer>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() => push('mailto:ajhosny@gmail.com')}
+                        theme={theme}
+                    >
                         <EmailIcon />
                         <SocialsLabel>Email</SocialsLabel>
                     </IconContainer>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() => push('/resume')}
+                        theme={theme}
+                    >
                         <ArticleIcon />
                         <SocialsLabel>Resume</SocialsLabel>
                     </IconContainer>

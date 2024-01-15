@@ -30,6 +30,8 @@ const StyledAvatar = styled(Avatar)<ThemeProps>`
         0 0 2.8rem #bc13fe,
         inset 0 0 1.3rem #bc13fe`
             : 'unset'};
+    border: 1px solid #ccc;
+    border-radius: 5px;
 `;
 
 export default function Profile({ theme }: ThemeProps) {
@@ -39,7 +41,7 @@ export default function Profile({ theme }: ThemeProps) {
                 theme={theme}
                 alt="Remy Sharp"
                 src={profilePic.src}
-                sx={{ width: 250, height: 250 }}
+                sx={{ width: 380, height: 280 }}
             />
             <Chatbot />
         </ContentRight>

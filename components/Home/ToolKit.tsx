@@ -141,15 +141,7 @@ export default function ToolKit({ theme }: ThemeProps) {
                 >
                     Express.Js
                 </ToolContainer>
-                <ToolContainer
-                    style={{
-                        backgroundColor: !isDarkMode
-                            ? 'rgb(69, 115, 255, .4)'
-                            : 'rgb(69, 115, 255)',
-                    }}
-                >
-                    Chart.Js
-                </ToolContainer>
+
                 <ToolContainer
                     style={{
                         backgroundColor: !isDarkMode

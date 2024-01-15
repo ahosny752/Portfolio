@@ -7,7 +7,7 @@ const ChatbotContainer = styled.div<ThemeProps>`
     width: 380px;
     margin: 0 auto;
     border: ${props => (props.theme.isDarkMode ? 'unset' : '1px solid #ccc')};
-    border-radius: 8px;
+    border-radius: 5px;
     padding: 16px;
     background-color: ${props => props.theme.primaryColor};
     box-shadow: ${props =>
@@ -153,7 +153,7 @@ const Chatbot = () => {
         themeContext as ThemeContextProps;
 
     const openingMessage =
-        "Hi I'm AJ's AI assistant. Im trained on his entire life!, hehe. Well at least some of it. You can ask me anything about AJ. Ask me things like 'What is AJ's favorite color?' or 'What is AJ's favorite food?', You can even ask about my past work experience, projects, hobbies or even fun facts!";
+        "Hi I'm Flex! AJ's personal AI assistant. I'm trained on (almost) his entire life! You can ask me anything about AJ. Ask me things like 'What are AJ's hobbies?' or 'What is AJ's favorite food?', You can even ask about my past work experience, projects, or even fun facts!";
 
     useEffect(() => {
         const aiMessage = {
@@ -221,7 +221,7 @@ const Chatbot = () => {
     };
     return (
         <ChatbotContainer theme={theme}>
-            <ChatbotHeader>AJ's AI Assistant</ChatbotHeader>
+            <ChatbotHeader>Chat with Flex!</ChatbotHeader>
             <ChatBotMessages ref={chatbotRef}>
                 {messages.map((message, index) => (
                     <div

@@ -7,7 +7,7 @@ import RocketImg from '../../assets/rocket.png';
 import Bio from './Bio';
 import Profile from './Profile';
 import WorkExperience from './WorkExperience';
-
+import ContactMe from './ContactMe';
 const HomeContainer = styled.div<ThemeProps>`
     display: flex;
     align-items: center;
@@ -52,10 +52,8 @@ const Image = styled.img`
 
 const SectionTwo = styled.div`
     margin-top: -150px;
-
     height: 100%;
-    border: 1px solid p;
-    width: 90%;
+    width: 100%;
 `;
 
 export default function Home(props: any) {
@@ -94,20 +92,12 @@ export default function Home(props: any) {
                         </ImageContainer>
                     ) : null}
                 </SectionOne>
+
                 <SectionTwo>
                     <WorkExperience theme={theme} />
                 </SectionTwo>
             </MainContent>
-            <div
-                style={{
-                    border: '1px solid red',
-                    height: '100%',
-                    width: '90%',
-                }}
-            >
-                <div style={{ height: '600px' }}></div>
-                Contact me
-            </div>
+            <ContactMe theme={theme} />
         </HomeContainer>
     );
 }

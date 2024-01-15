@@ -75,7 +75,7 @@ const IconContainer = styled.div<ThemeProps>`
 export default function Bio({ theme }: ThemeProps) {
     return (
         <ContentLeft>
-            <div style={{ fontSize: '38px' }}>Full Stack</div>
+            <div style={{ fontSize: '44px' }}>Full Stack</div>
             <div>
                 <object type="image/svg+xml" data={squiggle.src}></object>
             </div>
