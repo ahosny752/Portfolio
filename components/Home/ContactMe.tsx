@@ -125,8 +125,6 @@ export default function ContactMe({ theme }: ThemeProps) {
         }));
     };
 
-    console.log(formData, 'form data');
-
     const isDisabled =
         formData.name === '' ||
         formData.email === '' ||

@@ -182,7 +182,6 @@ const Chatbot = () => {
                 body: JSON.stringify(data),
             });
             const responseData = await response.json();
-            console.log(responseData, 'response data');
             return responseData;
         } catch (error) {
             console.error(
@@ -195,7 +194,6 @@ const Chatbot = () => {
 
     const scrollToBottom = () => {
         if (chatbotRef.current) {
-            console.log('here');
             chatbotRef.current.style.scrollBehavior = 'smooth'; // Apply smooth scrolling
 
             chatbotRef.current.scrollTop = chatbotRef.current.scrollHeight;

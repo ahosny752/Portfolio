@@ -52,7 +52,6 @@ export async function POST(req: Request) {
             docs[0].pageContent,
             numberOfChunks,
         );
-        console.log(dynamicChunkSize, 'dynamic chunk size');
         try {
             const splitter = new RecursiveCharacterTextSplitter({
                 chunkSize: dynamicChunkSize,
@@ -91,8 +90,6 @@ export async function POST(req: Request) {
                 data: 'File successfully uploaded to the vector store',
             });
         } catch (vectorStoreError) {
-            console.log(vectorStoreError, 'vector store');
-
             return NextResponse.json({ error: 'Error with the vector store' });
         }
     } catch (err) {

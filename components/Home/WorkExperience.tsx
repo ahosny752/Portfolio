@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import { ThemeProps, ThemeContextProps } from '@/contexts/ThemeContext';
+import { ThemeProps } from '@/contexts/ThemeContext';
 import styled from '@emotion/styled';
 import IbmPortraitPic from '../../assets/ibmPortrait.png';
 import DaviePortraitPic from '../../assets/daviePortrait.png';
 import flayrPortraitPic from '../../assets/flayrlabsHome.png';
 import davieWhiteLogo from '../../assets/davielogo.png';
-import davieBlackLogo from '../../assets/davieBlack.png';
-import IBMBlackLogo from '../../assets/ibmLogo.png';
-import FlayrLogo from '../../assets/flayrLogo.png';
-import { useTheme } from '@/contexts/ThemeContext';
+import davieBlackLogo from '../../assets/davieblack.png';
+import IBMBlackLogo from '../../assets/ibmlogo.png';
+import FlayrLogo from '../../assets/flayrlogo.png';
 
 const WorkExperienceContainer = styled.div`
     height: 100%;
