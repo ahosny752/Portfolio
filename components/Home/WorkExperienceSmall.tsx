@@ -6,7 +6,7 @@ import flayrPortraitPic from '../../assets/flayr.png';
 import davieWhiteLogo from '../../assets/davielogo.png';
 import davieBlackLogo from '../../assets/davieblack.png';
 import IBMBlackLogo from '../../assets/ibmlogo.png';
-import FlayrLogo from '../../assets/flayrlogo.png';
+import FlayrLogo from '../../assets/flayrLogo.png';
 
 const WorkExperienceContainer = styled.div`
     height: 100%;
