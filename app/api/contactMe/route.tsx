@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import nodemailer from 'nodemailer';
+import Mail from 'nodemailer/lib/mailer';
 
 export async function POST(req: Request) {
     try {
@@ -16,6 +18,24 @@ export async function POST(req: Request) {
         const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
         if (!url) throw new Error(`Expected env var SUPABASE_URL`);
 
+        const transport = nodemailer.createTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+
+            auth: {
+                user: process.env.NEXT_PUBLIC_NODE_MAILER_EMAIL,
+                pass: process.env.NEXT_PUBLIC_NODE_MAILER_PASSWORD,
+            },
+        });
+
+        const mailOptions: Mail.Options = {
+            from: process.env.NEXT_PUBLIC_NODE_MAILER_EMAIL,
+            to: process.env.NEXT_PUBLIC_NODE_MAILER_EMAIL,
+            subject: `Message from ${body.name} (${body.email})`,
+            text: `Name: ${body.name} Company: ${body.company} Email: ${body.email} Phone: ${body.phone} message: ${body.message}`,
+        };
         const supabase = createClient(url, privateKey);
 
         await supabase.from('clientform').insert([
@@ -27,6 +47,8 @@ export async function POST(req: Request) {
                 message: body.message,
             },
         ]);
+
+        await transport.sendMail(mailOptions);
 
         return NextResponse.json({
             data: true,

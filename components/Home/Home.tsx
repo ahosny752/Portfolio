@@ -64,9 +64,7 @@ export default function Home(props: any) {
         themeContext as ThemeContextProps;
 
     const [scrollPosition, setScrollPosition] = useState<number>(0);
-    const [isSmallScreen, setIsSmallScreen] = useState(
-        window.innerWidth < 1268,
-    );
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
@@ -81,8 +79,6 @@ export default function Home(props: any) {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
-    console.log(isSmallScreen, 'is small');
 
     useEffect(() => {
         const handleScroll = () => {
