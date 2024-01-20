@@ -11,6 +11,8 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import MessageIcon from '@mui/icons-material/Message';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
+import { submitForm } from '../../actions/formAction';
+import { FormButton } from '../Button';
 
 const ContactMeContainer = styled.div`
     margin-top: 200px;
@@ -177,7 +179,10 @@ export default function ContactMe({ theme }: ThemeProps) {
                 <ContactMeTitle>
                     Interested in my work? Contact Me!
                 </ContactMeTitle>
-                <ContactMeForm theme={theme} onSubmit={handleSubmit}>
+                <ContactMeForm
+                    theme={theme}
+                    action={formData => submitForm(formData)}
+                >
                     <Row>
                         <StyledTextField
                             id="input-with-icon-textfield"
@@ -269,24 +274,8 @@ export default function ContactMe({ theme }: ThemeProps) {
                             variant="outlined"
                         />
                     </Row>
-                    <StyledButton disabled={isDisabled} type="submit">
-                        {postData.isLoading ? (
-                            <CircularProgress
-                                style={{
-                                    height: '20px',
-                                    width: '20px',
-                                    color: 'white',
-                                }}
-                                color="primary"
-                            />
-                        ) : (
-                            <div>
-                                {isDisabled
-                                    ? 'Please fill out the required fields!'
-                                    : 'Sumbit'}
-                            </div>
-                        )}
-                    </StyledButton>
+
+                    <FormButton isDisabled={isDisabled} />
                     <br />
                 </ContactMeForm>
                 <div
