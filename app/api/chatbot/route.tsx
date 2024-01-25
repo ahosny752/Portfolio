@@ -53,7 +53,6 @@ export async function POST(req: Request) {
         try {
             result = await store.similaritySearch(data.question, 30);
         } catch (similaritySearchError) {
-            console.log(similaritySearchError, 'eror');
             return NextResponse.json({ error: 'Error with similarity search' });
         }
 

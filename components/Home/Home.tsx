@@ -70,7 +70,6 @@ export default function Home(props: any) {
         const handleResize = () => {
             setIsSmallScreen(window.innerWidth < 1268);
         };
-
         // Attach the event listener when the component mounts
         window.addEventListener('resize', handleResize);
 

@@ -8,6 +8,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import ArticleIcon from '@mui/icons-material/Article';
 import ToolKit from './ToolKit';
+import { useRouter } from 'next/navigation';
 
 const ContentLeft = styled.div`
     display: flex;
@@ -32,6 +33,7 @@ const Title = styled.div`
 
 const SocialsContainer = styled.div`
     display: none;
+    height: 140px;
 
     @media only screen and (max-width: 767px) {
         display: unset;
@@ -73,6 +75,8 @@ const IconContainer = styled.div<ThemeProps>`
 `;
 
 export default function Bio({ theme }: ThemeProps) {
+    const { push } = useRouter();
+
     return (
         <ContentLeft>
             <div style={{ fontSize: '44px' }}>Full Stack</div>
@@ -94,19 +98,33 @@ export default function Bio({ theme }: ThemeProps) {
             <SocialsContainer>
                 Social
                 <SocialsContent>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() => push('https://github.com/ahosny752')}
+                        theme={theme}
+                    >
                         <GitHubIcon />
                         <SocialsLabel>GitHub</SocialsLabel>
                     </IconContainer>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() =>
+                            push('https://www.linkedin.com/in/ahosny752/')
+                        }
+                        theme={theme}
+                    >
                         <LinkedInIcon />
                         <SocialsLabel>LinkedIn</SocialsLabel>
                     </IconContainer>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() => push('mailto:ajhosny@gmail.com')}
+                        theme={theme}
+                    >
                         <EmailIcon />
                         <SocialsLabel>Email</SocialsLabel>
                     </IconContainer>
-                    <IconContainer theme={theme}>
+                    <IconContainer
+                        onClick={() => push('/resume')}
+                        theme={theme}
+                    >
                         <ArticleIcon />
                         <SocialsLabel>Resume</SocialsLabel>
                     </IconContainer>

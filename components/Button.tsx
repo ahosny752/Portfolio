@@ -18,13 +18,10 @@ const StyledButton = styled(Button)`
 
     :disabled {
         background-color: #d1ace1;
-        color: red;
     }
 `;
 export const FormButton = ({ isDisabled }: { isDisabled: boolean }) => {
     const { pending } = useFormStatus();
-
-    console.log(pending, ' pending');
 
     return (
         <StyledButton disabled={isDisabled} type="submit">

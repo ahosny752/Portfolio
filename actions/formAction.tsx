@@ -1,8 +1,6 @@
 'use server';
 
 export const submitForm = async (formData: FormData) => {
-    console.log(JSON.stringify(formData), ' formData');
-
     const name = formData.get('name');
     const email = formData.get('email');
     const phone = formData.get('phone');
