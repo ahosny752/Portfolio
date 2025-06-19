@@ -116,7 +116,7 @@ export default function Home(props: any) {
                     )}
                 </SectionTwo>
             </MainContent>
-            <ContactMe theme={theme} />
+            {/* <ContactMe theme={theme} /> */}
         </HomeContainer>
     );
 }

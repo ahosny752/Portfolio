@@ -227,13 +227,13 @@ export default function Header() {
                         <EmailIcon />
                         <SocialsLabel>Email</SocialsLabel>
                     </IconContainer>
-                    <IconContainer
+                    {/* <IconContainer
                         onClick={() => push('/resume')}
                         theme={theme}
                     >
                         <ArticleIcon />
                         <SocialsLabel>Resume</SocialsLabel>
-                    </IconContainer>
+                    </IconContainer> */}
                 </SocialsContainer>
                 <ThemeSwitchContainer>
                     <ThemeSwitch

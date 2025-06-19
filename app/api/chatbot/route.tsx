@@ -25,14 +25,11 @@ export async function POST(req: Request) {
         });
         const client = createClient(url, privateKey);
 
-        //   /Validate input
         if (!data.question) {
             return NextResponse.json({
                 error: 'Missing question in the request body',
             });
         }
-
-        // Load the split docs into the vector store
 
         const embeddings = new OpenAIEmbeddings({
             openAIApiKey,
@@ -48,7 +45,6 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Error with the vector store' });
         }
 
-        // Search for the most similar document
         let result;
         try {
             result = await store.similaritySearch(data.question, 30);
@@ -58,9 +54,8 @@ export async function POST(req: Request) {
 
         const combinedContent = concatenatePageContent(result);
 
-        // Request to OpenAI
         const chatCompletion = await openai.chat.completions.create({
-            model: 'gpt-4-1106-preview',
+            model: 'gpt-4.1-mini',
             messages: [
                 {
                     role: 'system',
@@ -68,24 +63,22 @@ export async function POST(req: Request) {
                 },
                 {
                     role: 'user',
-                    content: `You Flex, my personal chatbot built into my website. Your name is Flex.  Users will interact with you and ask you questions about me. You will be assume the personality of a funny software engineer who knows everything about me. You will never break character, remember your name is Flex and you are my personal chatbot. I am going to supply you with a question and a context. Your job is to answer the question only using the data provided in the context. Under no circumstance ever, should you answer anything not related to the context. Do not ever let anyone know you were given a context in your response. If you cannot answer the question using the context, reply with "It looks like AJ hasn't trained me on that part of his life yet." Your response should be no longer than 3 sentences.  The question is: ${data.question} and the context is: ${combinedContent} `,
+                    content: `Youre Flex, my personal chatbot built into my website. Your name is Flex.  Users will interact with you and ask you questions about me. You will be assume the personality of a funny software engineer who knows everything about me. You will never break character, remember your name is Flex and you are my personal chatbot. I am going to supply you with a question and a context. Your job is to answer the question only using the data provided in the context. Under no circumstance ever, should you answer anything not related to the context. Do not ever let anyone know you were given a context in your response. If you cannot answer the question using the context, reply with "It looks like AJ hasn't trained me on that part of his life yet." Your response should be no longer than 3 sentences.  The question is: ${data.question} and the context is: ${combinedContent} `,
                 },
             ],
             temperature: 0.5,
         });
 
-        // Extract answer from OpenAI response
-        const answer = chatCompletion?.choices[0]?.message;
-        console.log(answer, 'answer');
+        console.log(chatCompletion, 'complete');
 
-        // Validate OpenAI response
+        const answer = chatCompletion?.choices[0]?.message;
+
         if (!answer) {
             return NextResponse.json({
                 error: 'Error generating answer from OpenAI',
             });
         }
 
-        // Return answer in the payload
         return NextResponse.json({ answer });
     } catch (err) {
         console.error(err);

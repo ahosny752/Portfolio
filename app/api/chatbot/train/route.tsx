@@ -7,13 +7,9 @@ import { createClient } from '@supabase/supabase-js';
 import path from 'path';
 
 function calculateDynamicChunkSize(text: any, numberOfChunks: number) {
-    // Split the text into words
     const words = text.split(/\s+/);
 
-    // Calculate the average number of words per chunk based on your desired granularity
-    const averageWordsPerChunk = Math.ceil(words.length / numberOfChunks); // numberOfChunks is a variable you can define
-
-    // Return the calculated chunk size
+    const averageWordsPerChunk = Math.ceil(words.length / numberOfChunks);
     return averageWordsPerChunk;
 }
 
@@ -35,7 +31,6 @@ export async function POST(req: Request) {
         const client = createClient(url, privateKey);
         const filePath = path.join('chatbot.txt');
 
-        // Load text file
         let docs;
         try {
             const loader = new TextLoader(filePath);
@@ -45,9 +40,8 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Error loading text file' });
         }
 
-        // Split the docs
         let splitDocs;
-        const numberOfChunks = 3; // Adjust based on your preference
+        const numberOfChunks = 3;
         const dynamicChunkSize = calculateDynamicChunkSize(
             docs[0].pageContent,
             numberOfChunks,
@@ -55,7 +49,7 @@ export async function POST(req: Request) {
         try {
             const splitter = new RecursiveCharacterTextSplitter({
                 chunkSize: dynamicChunkSize,
-                chunkOverlap: 0, // Adjust as needed
+                chunkOverlap: 0,
                 separators: ['\n\n', '\n', ' ', ''],
             });
             splitDocs = await splitter.splitDocuments([docs[0]]);
@@ -64,7 +58,6 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Error splitting documents' });
         }
 
-        // Load split docs into the vector store
         let vectorStore;
         try {
             vectorStore = await SupabaseVectorStore.fromDocuments(
@@ -78,14 +71,13 @@ export async function POST(req: Request) {
                     queryName: 'match_documents',
                 },
             );
-            // Validate vector store response
+
             if (!vectorStore) {
                 return NextResponse.json({
                     error: 'Error uploading to the vector store',
                 });
             }
 
-            // Return success message
             return NextResponse.json({
                 data: 'File successfully uploaded to the vector store',
             });
